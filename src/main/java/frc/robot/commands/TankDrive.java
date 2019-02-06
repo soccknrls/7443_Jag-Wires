@@ -1,13 +1,12 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TankDrive extends Command {
 
 	public TankDrive(){
-		requires(Robot.driveTrain);
+		requires(Robot.m_driveTrain);
 	}
 
 	@Override
@@ -16,10 +15,10 @@ public class TankDrive extends Command {
 	}
 
 	protected void execute(){
-		Robot.driveTrain.tankDrive(Robot.oi.getLeftStickY(), Robot.oi.getRightStickY());
+		Robot.m_driveTrain.tankDrive(Robot.oi.getLeftYAxis(), Robot.oi.getRightYAxis());
 	}
 
 	public void stop(){
-		Robot.driveTrain.tankDrive(0, 0);
+		Robot.m_driveTrain.tankDrive(0, 0);
 	}
 }

@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-
 import frc.robot.RobotMap;
 import frc.robot.commands.TankDrive;
 
@@ -36,12 +35,11 @@ public class DriveTrain extends Subsystem {
     public void tankDrive(double leftPower, double rightPower) {
 		m_RobotDrive.tankDrive(leftPower, rightPower);
 		System.out.println("[Subsystem] Driving in tank mode, left: " + leftPower + ", right: " + rightPower);
-	}
+    }
+
     @Override
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		//setDefaultCommand(new MySpecialCommand());
 		setDefaultCommand(new TankDrive());
     }
-    
 }

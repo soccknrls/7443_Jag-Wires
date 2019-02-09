@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.Compressor;
 
 //import frc.robot.commands.TankDrive;
 import frc.robot.subsystem.DriveTrain;
-import frc.robot.subsystem.Piston; 
+import frc.robot.subsystem.Piston;
+import frc.robot.subsystem.Slide; 
 import frc.robot.RobotMap;
 
 public class Robot extends TimedRobot {
@@ -20,6 +21,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static CameraServer cam;
   public static Piston m_piston;
+  public static Slide m_slide;
   
 
   public void robotInit() {
@@ -27,6 +29,8 @@ public class Robot extends TimedRobot {
     oi = new OI();
     m_driveTrain = new DriveTrain();
     m_piston = new Piston();
+    m_slide = new Slide();
+
     m_compressor = new Compressor(RobotMap.PCM_PORT);
     m_compressor.start();
   

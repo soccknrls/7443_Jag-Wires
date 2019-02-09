@@ -9,7 +9,6 @@ public class RobotMap {
   public static final int RIGHT_BACK_MOTOR_ID = 3;
 
   public static final int SLIDE_MOTOR_ID = 6;
-  //public static final int CLIMB_MOTOR_ID = 9;
   //public static final int LIFT_MOTOR_ID = 9;
 
   //JoyStick Port

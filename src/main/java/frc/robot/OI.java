@@ -1,10 +1,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-//import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //import edu.wpi.first.wpilibj.buttons.Button;
 
-
+import frc.robot.commands.PushPiston;
+import frc.robot.commands.ReturnPiston;
 public class OI {
 
     //Joystick
@@ -14,7 +15,7 @@ public class OI {
     //private JoystickButton fullSpeedButton = new JoystickButton(m_Joystick,1);
     //private JoystickButton halfSpeedButton = new JoystickButton(m_Joystick,2);
     //private JoystickButton approachSpeedButton = new JoystickButton(m_Joystick,4);
-    //private JoystickButton popPatchPanelButton = new JoystickButton(m_Joystick,3);
+    private JoystickButton pistonButton = new JoystickButton(m_Joystick,RobotMap.PISTON_BUTTON);
 
     public double m_Speed = .7;
 
@@ -22,7 +23,8 @@ public class OI {
         //fullSpeedButton.whenPressed(new setFullSpeed());
         //halfSpeedButton.whenPressed(new setHalfSpeed());
         //approachSpeedButton.whenPressed(new setApproachSpeed());
-        //popPatchPanelButton.whenPressed(new popPatchPanel());
+        pistonButton.whenPressed(new PushPiston());
+        pistonButton.whenReleased(new ReturnPiston());
     }
 
     public double getControllerAxis(int axis) {

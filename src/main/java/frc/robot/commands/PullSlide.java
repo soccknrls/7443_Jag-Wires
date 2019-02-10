@@ -3,18 +3,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveSlide extends Command{
+public class PullSlide extends Command{
     
-    public MoveSlide(){
+    public PullSlide(){
     }
 
     protected void initialize(){
-        System.out.println("[Command] Slide motor moving");
+        System.out.println("[Command] Pulling the slide in");
     }
 
     protected void execute(){
-        Robot.m_slide.moveSlide(Robot.oi.getLeftTriggerAxis());
-        //Robot.m_slide.moveSlide(-(Robot.oi.getRightTriggerAxis()));
+        Robot.m_slide.pullSlide(Robot.oi.dPadDown());
     }
 
     protected void interrupted(){
@@ -22,7 +21,7 @@ public class MoveSlide extends Command{
     }
 
     protected void end(){
-        System.out.println("[Command] Fisished moving Slide");
+        System.out.println("[Command] Fisished pulling the slide");
     }
 
     protected boolean isFinished(){

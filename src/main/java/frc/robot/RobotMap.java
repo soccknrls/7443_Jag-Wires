@@ -18,13 +18,14 @@ public class RobotMap {
   public static final int LEFT_DRIVE_STICK = 1;
   public static final int RIGHT_DRIVE_STICK = 5;
 
-  public static final int SLIDE_OUT_TRIGGER = 3;
-  public static final int SLIDE_IN_TRIGGER = 2;
-  
+  //public static final int SLIDE_OUT_TRIGGER = 3;
+  //public static final int SLIDE_IN_TRIGGER = 2;
+  public static int DPAD_POV = 0;
+
   public static final int PISTON_BUTTON = 3;
-  //public static final int FULL_SPEED_BUTTON = 1;
-  //public static final int HALF_SPEED_BUTTON = 2;
-  //public static final int APPROACH_SPEED_BUTTON = 4;
+  public static final int FULL_SPEED_BUTTON = 5;
+  public static final int HALF_SPEED_BUTTON = 6;
+  public static final int APPROACH_SPEED_BUTTON = 4;
 
   //Pneumatics
   public static final int PCM_PORT = 0;
@@ -34,8 +35,6 @@ public class RobotMap {
   //Lift mechanism
   //public static final int LIFT_UP_BUTTON = 6;
   //public static final int LIFT_DOWN_BUTTON = 5;
-
-
   
   //public static final int DRIVE_MODE = 1; //1 is tankDrive, 2 is arcadeDrive
 }

@@ -29,12 +29,12 @@ public class DriveTrain extends Subsystem {
         SpeedControllerGroup leftMotors = new SpeedControllerGroup(m_FrontLeftMotor, m_BackLeftMotor);
         SpeedControllerGroup rightMotors = new SpeedControllerGroup(m_FrontRightMotor, m_BackRightMotor);
 
-        m_RobotDrive= new DifferentialDrive(leftMotors, rightMotors);
+        m_RobotDrive = new DifferentialDrive(leftMotors, rightMotors);
     }
 
     public void tankDrive(double leftPower, double rightPower) {
 		m_RobotDrive.tankDrive(leftPower, rightPower);
-		System.out.println("[Subsystem] Driving in tank mode, left: " + leftPower + ", right: " + rightPower);
+		//System.out.println("[Subsystem] Driving in tank mode, left: " + leftPower + ", right: " + rightPower);
     }
 
     @Override

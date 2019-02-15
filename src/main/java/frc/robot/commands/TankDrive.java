@@ -9,7 +9,6 @@ public class TankDrive extends Command {
 		requires(Robot.m_driveTrain);
 	}
 
-	@Override
 	protected boolean isFinished() {
 		return false;
 	}

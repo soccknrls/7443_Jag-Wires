@@ -1,11 +1,13 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+//import edu.wpi.first.cameraserver.CameraServerShared;
+//import edu.wpi.first.cameraserver.CameraServerSharedStore;
 import edu.wpi.first.wpilibj.TimedRobot;
 //import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.Compressor;
-//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+///import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //import frc.robot.commands.TankDrive;
@@ -20,7 +22,8 @@ public class Robot extends TimedRobot {
   public static Compressor m_compressor; 
   public static DriveTrain m_driveTrain;
   public static OI oi;
-  public static CameraServer cam;
+  public static CameraServer cam0CameraServer;
+  public static CameraServer cam1CameraServer;
   public static Piston m_piston;
   public static Slide m_slide;
   public static LiftMotors m_liftMotors;
@@ -36,7 +39,7 @@ public class Robot extends TimedRobot {
     m_compressor = new Compressor(RobotMap.PCM_PORT);
     m_compressor.start();
   
-    CameraServer.getInstance().startAutomaticCapture();
+    CameraServer.getInstance().startAutomaticCapture(0);
   }
 
   @Override
@@ -45,11 +48,11 @@ public class Robot extends TimedRobot {
 
   @Override
 	public void disabledPeriodic() {
-    Scheduler.getInstance().run();
   }
 
   @Override
   public void robotPeriodic(){
+    Scheduler.getInstance().run();
   }
 
   @Override
@@ -59,7 +62,6 @@ public class Robot extends TimedRobot {
 
   @Override
 	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
   }
 
   @Override

@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
+import frc.robot.RobotMap;
 
 public class FullSpeed extends Command{
     
@@ -13,7 +14,7 @@ public class FullSpeed extends Command{
     }
 
     protected void execute(){
-        OI.setSpeed(0.7);
+        OI.setSpeed(RobotMap.ROBOT_SPEED);
     }
 
     protected void interrupted(){

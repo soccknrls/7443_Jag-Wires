@@ -2,6 +2,9 @@ package frc.robot;
 
 public class RobotMap {
 
+  //Robot Speed
+  public static final double ROBOT_SPEED = .7;
+
   //Motors CAN ID's
   public static final int LEFT_FRONT_MOTOR_ID = 0;
   public static final int LEFT_BACK_MOTOR_ID = 2;
@@ -22,6 +25,7 @@ public class RobotMap {
 
   //Pneumatic Control
   public static final int PISTON_BUTTON = 3;
+  public static final int CARGO_PISTON_BUTTON = 2;
   
   //Gear Change
   public static final int FULL_SPEED_BUTTON = 5;
@@ -32,6 +36,8 @@ public class RobotMap {
   public static final int PCM_PORT = 0;
   public static final int SOLENOID_FORWARD_PORT = 4;
   public static final int SOLENOID_REVERSE_PORT = 7;
+  public static final int CARGO_FORWARD_PORT = 3;
+  public static final int CARGO_REVERSE_PORT = 6;
   
   //Lift mechanism
   public static final int LIFT_FRONT_TRIGGER = 3;

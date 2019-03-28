@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.PushPiston;
 import frc.robot.commands.ReturnPiston;
+import frc.robot.commands.LiftCargo;
+import frc.robot.commands.ReturnCargo;
 import frc.robot.commands.FullSpeed;
 import frc.robot.commands.HalfSpeed;
 import frc.robot.commands.ApproachSpeed;
@@ -20,15 +22,19 @@ public class OI {
     private JoystickButton approachSpeedButton = new JoystickButton(m_Joystick,RobotMap.APPROACH_SPEED_BUTTON);
 
     private JoystickButton pistonButton = new JoystickButton(m_Joystick,RobotMap.PISTON_BUTTON);
+    private JoystickButton cargoButton = new JoystickButton(m_Joystick,RobotMap.CARGO_PISTON_BUTTON);
 
     //Set default speed
-    public static double m_Speed = .7;
+    public static double m_Speed = RobotMap.ROBOT_SPEED;
 
     public OI() {
         
         //Associate button actions to Commands
         pistonButton.whenPressed(new PushPiston());
         pistonButton.whenReleased(new ReturnPiston());
+
+        cargoButton.whenPressed(new LiftCargo());
+        cargoButton.whenReleased(new ReturnCargo());
         
         fullSpeedButton.whenPressed(new FullSpeed());
         halfSpeedButton.whenPressed(new HalfSpeed());

@@ -1,0 +1,14 @@
+COM7
+joystick
+axis,Drive,0,1
+axis,Turn,0,3
+axis,Pos_Neg,0,2
+button,Dump,0,0
+button,Pickup,0,1
+button,M_Rock,0,4
+button,L_Rock,0,3
+button,Cargo,0,2
+button,M_Arm,0,10
+button,M_Elbow,0,11
+button,M_Wrist,0,9
+button,Auto,0,6

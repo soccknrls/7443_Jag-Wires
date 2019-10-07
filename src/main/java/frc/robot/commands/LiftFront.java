@@ -3,9 +3,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftCargo extends Command{
+public class LiftFront extends Command{
 
-    public LiftCargo(){
+    public LiftFront(){
     }
 
     protected void initialize(){
@@ -13,7 +13,7 @@ public class LiftCargo extends Command{
     }
 
     protected void execute(){
-        Robot.m_piston.liftCargo();
+        Robot.m_piston.liftFront();;
     }
 
     protected void interrupted(){

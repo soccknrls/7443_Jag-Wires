@@ -5,8 +5,12 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.PushPiston;
 import frc.robot.commands.ReturnPiston;
+import frc.robot.commands.LiftFront;
+import frc.robot.commands.LowerFront;
+import frc.robot.commands.LiftRear;
+import frc.robot.commands.LowerRear;
 import frc.robot.commands.LiftCargo;
-import frc.robot.commands.ReturnCargo;
+import frc.robot.commands.LowerCargo;
 import frc.robot.commands.FullSpeed;
 import frc.robot.commands.HalfSpeed;
 import frc.robot.commands.ApproachSpeed;
@@ -21,8 +25,10 @@ public class OI {
     private JoystickButton halfSpeedButton = new JoystickButton(m_Joystick,RobotMap.HALF_SPEED_BUTTON);
     private JoystickButton approachSpeedButton = new JoystickButton(m_Joystick,RobotMap.APPROACH_SPEED_BUTTON);
 
-    private JoystickButton pistonButton = new JoystickButton(m_Joystick,RobotMap.PISTON_BUTTON);
-    private JoystickButton cargoButton = new JoystickButton(m_Joystick,RobotMap.CARGO_PISTON_BUTTON);
+    private JoystickButton pistonButton = new JoystickButton(m_Joystick,RobotMap.HATCH_PISTON_BUTTON);
+    private JoystickButton frontLiftButton = new JoystickButton(m_Joystick,RobotMap.FRONT_LIFT_PISTON);
+    private JoystickButton rearLiftButton = new JoystickButton(m_Joystick,RobotMap.REAR_LIFT_PISTON);
+    private JoystickButton cargoLiftButton = new JoystickButton(m_Joystick,RobotMap.CARGO_PISTON_BUTTON);
 
     //Set default speed
     public static double m_Speed = RobotMap.ROBOT_SPEED;
@@ -33,9 +39,15 @@ public class OI {
         pistonButton.whenPressed(new PushPiston());
         pistonButton.whenReleased(new ReturnPiston());
 
-        cargoButton.whenPressed(new LiftCargo());
-        cargoButton.whenReleased(new ReturnCargo());
-        
+        frontLiftButton.whenPressed(new LiftFront());
+        frontLiftButton.whenReleased(new LowerFront());
+
+        rearLiftButton.whenPressed(new LiftRear());
+        rearLiftButton.whenReleased(new LowerRear());
+
+        cargoLiftButton.whenPressed(new LiftCargo());
+        cargoLiftButton.whenReleased(new LowerCargo());
+    
         fullSpeedButton.whenPressed(new FullSpeed());
         halfSpeedButton.whenPressed(new HalfSpeed());
         approachSpeedButton.whenPressed(new ApproachSpeed());
@@ -58,13 +70,5 @@ public class OI {
 
     public double getRightYAxis(){
         return getControllerAxis(RobotMap.RIGHT_DRIVE_STICK);
-    }
-
-    public double getLeftTriggerAxis(){
-        return getControllerAxis(RobotMap.LIFT_FRONT_TRIGGER);
-    }
-
-    public double getRightTriggerAxis(){
-        return getControllerAxis(RobotMap.LIFT_REAR_TRIGGER);
     }
 }

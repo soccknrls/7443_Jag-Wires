@@ -3,18 +3,13 @@ package frc.robot;
 public class RobotMap {
 
   //Robot Speed
-  public static final double ROBOT_SPEED = .7;
+  public static final double ROBOT_SPEED = .8;
 
   //Motors CAN ID's
-  public static final int LEFT_FRONT_MOTOR_ID = 0;
+  public static final int LEFT_FRONT_MOTOR_ID = 4;
   public static final int LEFT_BACK_MOTOR_ID = 2;
   public static final int RIGHT_FRONT_MOTOR_ID = 1;
   public static final int RIGHT_BACK_MOTOR_ID = 3;
-  public static final int SLIDE_MOTOR_ID = 6;
-  
-  //PWM Motor Ports
-  public static final int LIFT_FRONT_MOTOR_ID = 0;
-  public static final int LIFT_BACK_MOTOR_ID = 1;
 
   //JoyStick Port
   public static final int JOYSTICK_PORT = 0;
@@ -23,9 +18,11 @@ public class RobotMap {
   public static final int LEFT_DRIVE_STICK = 1;
   public static final int RIGHT_DRIVE_STICK = 5;
 
-  //Pneumatic Control
-  public static final int PISTON_BUTTON = 3;
-  public static final int CARGO_PISTON_BUTTON = 2;
+  //Pneumatic Buttons
+  public static final int HATCH_PISTON_BUTTON = 3;
+  public static final int FRONT_LIFT_PISTON = 1;
+  public static final int REAR_LIFT_PISTON = 2;
+  public static final int CARGO_PISTON_BUTTON = 8;
   
   //Gear Change
   public static final int FULL_SPEED_BUTTON = 5;
@@ -36,12 +33,10 @@ public class RobotMap {
   public static final int PCM_PORT = 0;
   public static final int SOLENOID_FORWARD_PORT = 4;
   public static final int SOLENOID_REVERSE_PORT = 7;
-  public static final int CARGO_FORWARD_PORT = 3;
-  public static final int CARGO_REVERSE_PORT = 6;
-  
-  //Lift mechanism
-  public static final int LIFT_FRONT_TRIGGER = 3;
-  public static final int LIFT_REAR_TRIGGER = 2;
-  
-  //public static final int DRIVE_MODE = 1; //1 is tankDrive, 2 is arcadeDrive
+  public static final int REAR_LIFT_FORWARD_PORT = 2;
+  public static final int REAR_LIFT_REVERSE_PORT = 5;
+  public static final int FRONT_LIFT_FORWARD_PORT = 3;
+  public static final int FRONT_LIFT_REVERSE_PORT = 6;
+  public static final int CARGO_LIFT_FORWARD_PORT = 0;
+  public static final int CARGO_LIFT_REVERSE_PORT = 1;
 }

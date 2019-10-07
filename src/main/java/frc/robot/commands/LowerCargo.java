@@ -3,17 +3,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftCargo extends Command{
+public class LowerCargo extends Command{
 
-    public LiftCargo(){
+    public LowerCargo(){
     }
 
     protected void initialize(){
-        System.out.println("[Command] Lifting Cargo");
+        System.out.println("[Command] Lower Cargo");
     }
 
     protected void execute(){
-        Robot.m_piston.liftCargo();
+        Robot.m_piston.lowerCargo();
     }
 
     protected void interrupted(){
@@ -21,7 +21,7 @@ public class LiftCargo extends Command{
     }
     
     protected void end(){
-        System.out.println("[Command] Finished Lifting Cargo");
+        System.out.println("[Command] Finished Lower Cargo");
     }
 
     protected boolean isFinished(){

@@ -10,7 +10,10 @@ package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.controller.PIDController;
+
+import org.graalvm.compiler.nodes.calc.RightShiftNode;
+
+import com.revrobotics.CANPIDController;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -24,25 +27,24 @@ import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
 
-  // The motors on the left side of the drive.
   private CANSparkMax frontLeftMotor = new CANSparkMax(Constants.DriveConstants.kLeftMotorFrontPort, MotorType.kBrushless);
   private CANSparkMax backLeftMotor = new CANSparkMax(Constants.DriveConstants.kLeftMotorBackPort, MotorType.kBrushless);
+  private CANEncoder leftEncoder = new CANEncoder(frontLeftMotor);
   
-  // The motors on the right side of the drive.
   private CANSparkMax frontRightMotor = new CANSparkMax(Constants.DriveConstants.kRightMotorFrontPort, MotorType.kBrushless);
   private CANSparkMax backRightMotor = new CANSparkMax(Constants.DriveConstants.kRightMotorBackPort, MotorType.kBrushless);
+  private CANEncoder rightEncoder = new CANEncoder(frontRightMotor);
   
-  //Gyro
-  AHRS gyro = new AHRS(SPI.Port.kMXP);
-
   DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Constants.DriveConstants.kWidthBetweenWheelsMeters);
   DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(getHeading());
-
+  
   DifferentialDrive m_drive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
   SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(0.397, 0.0775, 0.00973);
-
-  PIDController leftPidController = new PIDController(Constants.DriveConstants.kP, 0, 0);
-  PIDController rightPidController = new PIDController(Constants.DriveConstants.kP, 0, 0);
+  
+  CANPIDController leftPidController = new CANPIDController(Constants.DriveConstants.kP, 0, 0);
+  CANPIDController rightPidController = new CANPIDController(Constants.DriveConstants.kP, 0, 0);
+  
+  AHRS gyro = new AHRS(SPI.Port.kMXP);
 
   Pose2d pose;
   double m_speed = 0.99; 
@@ -127,5 +129,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void setSpeed(double speed) {
     m_speed = speed; 
+  }
+
+  public void resetEncoders() {
+    rightEncoder.setPosition(0);
+    leftEncoder.setPosition(0);
   }
 }

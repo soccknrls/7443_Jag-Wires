@@ -15,12 +15,12 @@ public class BasicAutoCommand extends SequentialCommandGroup{
         addCommands(
             new SequentialCommandGroup(
                 new ParallelCommandGroup(
-                    new RunCommand(() -> shooter.runMotors(.5)),
+                    new RunCommand(() -> shooter.runMotors(2000)),
                     new RunCommand(() -> intake.runFeeder(-Constants.AuxConstants.kFeederMotorSpeed)))
                 .withTimeout(5),
                 new ParallelCommandGroup(
                     new AutoDrive(drive, led),
-                    new RunCommand(() -> shooter.runMotors(0.0)),
+                    new RunCommand(() -> shooter.stopMotors()),
                     new RunCommand(() -> intake.stopFeeder()))
                 .withTimeout(3)
             )

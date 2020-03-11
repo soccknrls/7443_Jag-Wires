@@ -26,19 +26,21 @@ public final class Constants {
     public static final int kLeftShooterPort = 5;
     public static final int kRightShooterPort = 6;
 
-    public static final double kShooterTargetRPS = 4000;
-    public static final double kShooterFreeRPS = 5300;
-    public static final double kShooterToleranceRPS = 50;
+    public static final double kleftP = 0;
+    public static final double kleftI = 0;
+    public static final double kleftD = 0;
+    public static final double kleftIz = 0;
+    public static final double kleftFF = 0;
+    public static final double kleftMaxOut = 0;
+    public static final double kleftMinOut = 0;
 
-    public static final double kShooterP = 1;
-    public static final double kShooterI = 0;
-    public static final double kShooterD = 0;
-
-    public static final double kSVolts = 0.05;
-    public static final double kVVoltSecondsPerRotation = 12.0 / kShooterFreeRPS;
-    public static final double k10ftShooterSpeed = .4;
-    public static final double k18ftShooterSpeed = .3;
-    public static final double k32ftShooterSpeed = .6;
+    public static final double krightP = 0;
+    public static final double krightI = 0;
+    public static final double krightD = 0;
+    public static final double krightIz = 0;
+    public static final double krightFF = 0;
+    public static final double krightMaxOut = 0;
+    public static final double krightMinOut = 0;
   }
 
   public static final class PneumaticConstants {

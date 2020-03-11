@@ -31,7 +31,6 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
-import frc.robot.commands.AlignShooter;
 import frc.robot.commands.BasicAutoCommand;
 
 @SuppressWarnings("unused")
@@ -48,7 +47,7 @@ public class RobotContainer {
   Command BasicAutoCommand = new BasicAutoCommand(m_robotDrive, m_intake, m_shooter, m_5vled);
   Joystick m_driverController = new Joystick (JoystickButtons.kDriverControllerPort);
 
-  double shooterSpeed = .4;
+  double shooterRPM = 2000;
 
   public Command complexCommand() {
     TrajectoryConfig config = new TrajectoryConfig(Constants.DriveConstants.kMaxVelocityMeters, Constants.DriveConstants.kMaxAccelerationMeters)
@@ -93,8 +92,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     new JoystickButton(m_driverController, Constants.JoystickButtons.kShooterButton)
-      .whileHeld(() -> m_shooter.runMotors(shooterSpeed))
-      .whenReleased(() -> m_shooter.runMotors(0.0));
+      .whileHeld(() -> m_shooter.runMotors(shooterRPM))
+      .whenReleased(() -> m_shooter.stopMotors());
     
     new JoystickButton(m_driverController, Constants.JoystickButtons.kIntakeButton)
       .whileHeld(() -> m_intake.runIntake(-Constants.AuxConstants.kIntakeMotorSpeed), m_intake)
@@ -106,15 +105,15 @@ public class RobotContainer {
   
     new JoystickButton(m_driverController, Constants.JoystickButtons.kTurboButton)
       .whenPressed(() -> m_robotDrive.setSpeed(0.99))
-      .whenPressed(() -> shooterSpeed = 0.7);
+      .whenPressed(() -> shooterRPM = 4000);
       
     new JoystickButton(m_driverController, Constants.JoystickButtons.kFullSpeedButton)
       .whenPressed(() -> m_robotDrive.setSpeed(0.75))
-      .whenPressed(() -> shooterSpeed = 0.35);
+      .whenPressed(() -> shooterRPM = 1700);
 
     new JoystickButton(m_driverController, Constants.JoystickButtons.kSlowSpeedButton)
       .whenPressed(() -> m_robotDrive.setSpeed(0.5))
-      .whenPressed(() -> shooterSpeed = 0.4);
+      .whenPressed(() -> shooterRPM = 2000);
 
     new JoystickButton(m_driverController, Constants.JoystickButtons.kFeederUpButton)
       .whenPressed(() -> m_intake.runFeeder(Constants.AuxConstants.kFeederMotorSpeed), m_intake)

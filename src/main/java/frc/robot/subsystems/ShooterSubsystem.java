@@ -2,53 +2,84 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.CANEncoder;
-import edu.wpi.first.wpilibj2.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-// import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import com.revrobotics.CANPIDController;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 import frc.robot.Constants.ShooterConstants;
 
-public class ShooterSubsystem extends PIDSubsystem {
+public class ShooterSubsystem extends SubsystemBase {
 
-    private final CANSparkMax leftShooterMotor = new CANSparkMax(ShooterConstants.kLeftShooterPort, MotorType.kBrushless);
-    private final CANSparkMax rightShooterMotor = new CANSparkMax(ShooterConstants.kRightShooterPort, MotorType.kBrushless);
+    private final CANSparkMax leftShooterMotor, rightShooterMotor;
+    private CANEncoder leftShooterEncoder, rightShooterEncoder;
+    private CANPIDController leftPIDController, rightPIDController;
+    public double setPoint;
 
-    private final CANEncoder leftShooterEncoder = new CANEncoder(leftShooterMotor);
-    private final CANEncoder rightShooterEncoder = new CANEncoder(rightShooterMotor);
-
-    private final SimpleMotorFeedforward feedForward = new SimpleMotorFeedforward(ShooterConstants.kSVolts, ShooterConstants.kVVoltSecondsPerRotation);
 
     public ShooterSubsystem() {
-        super(new PIDController(ShooterConstants.kShooterP, ShooterConstants.kShooterI, ShooterConstants.kShooterD));
-        getController().setTolerance(ShooterConstants.kShooterToleranceRPS);
-        setSetpoint(ShooterConstants.kShooterTargetRPS);
+        leftShooterMotor = new CANSparkMax(ShooterConstants.kLeftShooterPort, MotorType.kBrushless);
+        leftShooterMotor.restoreFactoryDefaults();
+        leftShooterMotor.setIdleMode(IdleMode.kCoast);
+        leftShooterMotor.setSmartCurrentLimit(60);
+        leftShooterMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 5);
+        leftShooterMotor.burnFlash();
+        leftShooterEncoder = leftShooterMotor.getEncoder();
+        leftPIDController = leftShooterMotor.getPIDController();
+        leftPIDController.setP(Constants.ShooterConstants.kleftP);
+        leftPIDController.setI(Constants.ShooterConstants.kleftI);
+        leftPIDController.setD(Constants.ShooterConstants.kleftD);
+        leftPIDController.setIz(Constants.ShooterConstants.kleftIz);
+        leftPIDController.setFF(Constants.ShooterConstants.kleftFF);
+        leftPIDController.setOutputRange(Constants.ShooterConstants.kleftMinOut, Constants.ShooterConstants.kleftMaxOut);
+
+        rightShooterMotor = new CANSparkMax(ShooterConstants.kRightShooterPort, MotorType.kBrushless);
+        rightShooterMotor.restoreFactoryDefaults();
+        rightShooterMotor.setIdleMode(IdleMode.kCoast);
+        rightShooterMotor.setSmartCurrentLimit(60);
+        rightShooterMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 5);
+        rightShooterMotor.burnFlash();
+        rightShooterEncoder = rightShooterMotor.getEncoder();
+        rightPIDController = rightShooterMotor.getPIDController();
+        rightPIDController.setP(Constants.ShooterConstants.krightP);
+        rightPIDController.setI(Constants.ShooterConstants.krightI);
+        rightPIDController.setD(Constants.ShooterConstants.krightD);
+        rightPIDController.setIz(Constants.ShooterConstants.krightIz);
+        rightPIDController.setFF(Constants.ShooterConstants.krightFF);
+        rightPIDController.setOutputRange(Constants.ShooterConstants.krightMinOut, Constants.ShooterConstants.krightMaxOut);
+
+        SmartDashboard.putNumber("Left P", leftPIDController.getP());
+        SmartDashboard.putNumber("Right P", rightPIDController.getP());
     }
 
-    @Override
+    public void runMotors(double desiredRPM) {
+        setPoint = desiredRPM;
+
+        leftPIDController.setReference(setPoint, ControlType.kVelocity);
+        rightPIDController.setReference(setPoint, ControlType.kVelocity);
+
+        SmartDashboard.putNumber("Setpoint", setPoint);
+        SmartDashboard.putNumber("Left Output Current", leftShooterMotor.getOutputCurrent());
+        SmartDashboard.putNumber("Right Output Current", rightShooterMotor.getOutputCurrent());
+    }
+
+    public void stopMotors() {
+        leftShooterMotor.set(0.0);
+        rightShooterMotor.set(0.0;)
+    }
+
     public void periodic() {
-        SmartDashboard.putNumber("Left Encoder", leftShooterEncoder.getVelocity());
-        SmartDashboard.putNumber("Right Encoder", -rightShooterEncoder.getVelocity());
+        SmartDashboard.putNumber("Left Velocity", leftShooterEncoder.getVelocity());
+        SmartDashboard.putNumber("Right Velocity", rightShooterEncoder.getVelocity());
     }
 
-    @Override
-    public void useOutput(double output, double setpoint) {
-        leftShooterMotor.setVoltage(output + feedForward.calculate(setpoint));
-        rightShooterMotor.setVoltage(output + feedForward.calculate(setpoint));
-    }
-
-    public void runMotors(double speed) {
-        leftShooterMotor.set(speed);
-        rightShooterMotor.set(-speed);
-    }
-
-    public boolean atSetpoint() {
-        return m_controller.atSetpoint();
-    }
-
-    @Override
-    protected double getMeasurement() {
-        return 0;
+    public boolean leftAtSpeed() {
+        if(((setPoint - leftShooterEncoder.getVelocity()) <= 250) && ((setPoint - rightShooterEncoder.getVelocity()) <= 250)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

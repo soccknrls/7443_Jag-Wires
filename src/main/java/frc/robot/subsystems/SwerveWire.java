@@ -22,8 +22,8 @@ import frc.robot.drivers.SwerveWireModuleBuilder;
 import frc.robot.drivers.NavX;
 
 public class SwerveWire extends Subsystem {
-    private static final double TRACKWIDTH = 19.5;
-    private static final double WHEELBASE = 23.5;
+    private static final double TRACKWIDTH = 19.0;
+    private static final double WHEELBASE = 19.0;
 
     private static SwerveWire instance;
 
